@@ -3,6 +3,7 @@ package Model.Negocio;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -14,30 +15,39 @@ public class Producto  implements Serializable  {
     }
 
     @SerializedName("id")
+    @Expose
     private String id;
 
     @SerializedName("tiendaId")
+    @Expose
     private String tiendaId;
 
     @SerializedName("titulo")
+    @Expose
     private String titulo;
 
     @SerializedName("descripcion")
+    @Expose
     private String descripcion;
 
     @SerializedName("urlImagen")
+    @Expose
     private String urlImagen;
 
     @SerializedName("status")
+    @Expose
     private int status;
 
     @SerializedName("descuento")
+    @Expose
     private int descuento;
 
     @SerializedName("precios")
+    @Expose
     private ArrayList<Precio> precios;
 
     @SerializedName("extras")
+    @Expose
     private ArrayList<Extra> extras;
 
 

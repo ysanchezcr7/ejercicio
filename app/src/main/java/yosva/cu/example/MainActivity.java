@@ -37,14 +37,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        checkAndRequestPermissions();
         listaCategoria = findViewById(R.id.rvCategorias);
-        inicializarAdaptador();
+        listaCategoria.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaCategoria.setLayoutManager(llm);
-        checkAndRequestPermissions();
+
+        inicializarAdaptador();
         lanzarPeticion();
+
     }
 
 
@@ -58,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void lanzarPeticion() {
         progressDialog = ProgressDialog.show(this, "",
-                "Por favor, espere cargando las Categorias...", true);
-        categorias = new ArrayList<>();
+                "Por favor espere, cargando las Categorias...", true);
+       // categorias = new ArrayList<CategoriasWithProd>();
         //final android.app.AlertDialog progressDialog = new SpotsDialog(this, R.style.Custom1);
         //  progressDialog.show();
         // final AlertDialog progressDialog  = new SpotsDialog.Builder().setContext(context).build()
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 Toast.makeText(getApplicationContext(),"Succesful Data " , Toast.LENGTH_LONG).show();
-                Log.d("Array ", "r: "+ response.body());
+               //Log.d("Array ", "r: "+ response.body());
                 adaptadorCategoria.setData(response.body());
 
                 if (progressDialog != null) {

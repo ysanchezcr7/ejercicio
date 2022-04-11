@@ -26,7 +26,7 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     public static ArrayList<CategoriasWithProd> categorias;
     public static Context context;
-    public static CategoriasWithProd categoria;
+   // public static CategoriasWithProd categoria;
     public static ListaCategoriaAdapter adapter;
     private static View.OnClickListener listener;
 
@@ -39,24 +39,26 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
 
         this.categorias = categorias;
         this.context = context;
-        adapter = this;
+       // adapter = this;
 
 
     }
     @Override
     public CategoriaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.element_list_categoria, parent, false);
-        return new CategoriaViewHolder(v);
+        CategoriaViewHolder holder = new CategoriaViewHolder(v);
+       // holder.setIsRecyclable(false);
+        return holder;
 
     }
 
 
     @Override
     public void onBindViewHolder(CategoriaViewHolder catViewHolder, int position) {
-
-        categoria = categorias.get(position);
+        catViewHolder.setIsRecyclable(false);
+        CategoriasWithProd categoria = categorias.get(position);
         catViewHolder.tvTitle.setText(categoria.getCategoria());
-
+        catViewHolder.recyclerViewProductos.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(
            catViewHolder.recyclerViewProductos.getContext(),
            LinearLayoutManager.VERTICAL,false
@@ -68,11 +70,15 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
         catViewHolder.recyclerViewProductos.setLayoutManager(layoutManager);
         catViewHolder.recyclerViewProductos.setAdapter(listaProductoAdapter);
         catViewHolder.recyclerViewProductos.setRecycledViewPool(viewPool);
+        listaProductoAdapter.notifyDataSetChanged();
 
-        catViewHolder.setIsRecyclable(false);
+
 
     }
-
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
     @Override
     public int getItemCount() {
 
@@ -81,7 +87,7 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
     public void setData(ArrayList<CategoriasWithProd> listcats) {
 
         this.categorias = listcats;
-        Log.d("productos","" + listcats);
+      //  Log.d("productos","" + listcats);
         notifyDataSetChanged();
     }
 

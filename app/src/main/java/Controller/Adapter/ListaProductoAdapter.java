@@ -38,6 +38,10 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import yosva.cu.example.DetallesProducto;
 import yosva.cu.example.R;
 
@@ -49,7 +53,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
 
     public static ArrayList<Producto> productos;
     public static Context context;
-    public static Producto producto;
+    //public static Producto producto;
     public static ListaProductoAdapter adapter;
     private static View.OnClickListener listener;
 
@@ -63,7 +67,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
         // Log.e("ASD", "" + productos);
         this.productos = productos;
         this.context = context;
-        adapter = this;
+        //adapter = this;
 
 
     }
@@ -73,18 +77,43 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
     @Override
     public ProductoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.element_list_productos, parent, false);
-        return new ProductoViewHolder(v);
+        ProductoViewHolder holder = new ProductoViewHolder(v);
+       // holder.setIsRecyclable(false);
+        return holder;
 
     }
 
     @Override
     public void onBindViewHolder(ProductoViewHolder productoViewHolder, int position) {
-
-        producto = productos.get(position);
+        productoViewHolder.setIsRecyclable(false);
+        Producto producto = productos.get(position);
         //String id = String.valueOf(post.getIdPosts());
         // postsViewHolder.tvTitle.setText(usserid);
         productoViewHolder.tvTitle.setText(producto.getTitulo());
         productoViewHolder.tvdescription.setText(producto.getDescripcion());
+
+       // Glide.with(context).load(producto.getUrlImagen()).into(productoViewHolder.imgProducto);
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round);
+
+
+
+        Glide.with(context).load(producto.getUrlImagen()).apply(options).into(productoViewHolder.imgProducto);
+//        if (producto.getUrlImagen() == null) {
+//            productoViewHolder.imgProducto.setImageDrawable(context.getResources().getDrawable(R.drawable.contact_img_vasio));
+//        } else {
+//
+//            Bitmap image = getBitmapFromURL(producto.getUrlImagen());
+//            productoViewHolder.imgProducto.setImageBitmap(image);
+//
+//
+//        }
+        //  productoViewHolder.imgProducto.setImageResource(producto.getUrlImagen());
+        // postsViewHolder.setIsRecyclable(false);
+
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 productoViewHolder.recyclerViewPrecio.getContext(),
@@ -98,21 +127,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
         productoViewHolder.recyclerViewPrecio.setAdapter(listaPrecAdapter);
         productoViewHolder.recyclerViewPrecio.setRecycledViewPool(viewPool);
 
-        productoViewHolder.setIsRecyclable(false);
 
-
-
-//        if (producto.getUrlImagen() == null) {
-//            productoViewHolder.imgProducto.setImageDrawable(context.getResources().getDrawable(R.drawable.contact_img_vasio));
-//        } else {
-//
-//            Bitmap image = getBitmapFromURL(producto.getUrlImagen());
-//            productoViewHolder.imgProducto.setImageBitmap(image);
-//
-//
-//        }
-        //  productoViewHolder.imgProducto.setImageResource(producto.getUrlImagen());
-        // postsViewHolder.setIsRecyclable(false);
 
     }
 
@@ -170,14 +185,6 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
                 @Override
                 public void onClick(View view) {
 
-//                    for (int i=0; i<productos.size();i++){
-//                        if(productos.get(i).getId().equals(producto.getId())){
-//
-//                            //productos.get(i).setCantidad(productos.get(i).getCantidad()+1);
-//                            //xiste = true;
-//                            break;
-//                        }
-//                    }
                     int selected = getLayoutPosition();
                     final String url = productos.get(selected).getUrlImagen();
                     final String titulo = productos.get(selected).getTitulo();
@@ -190,7 +197,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
                    // it = extras.get(selected).getItems();
                     //Log.e("item","" + item);
                     //Log.e("extras","e: "+ extras.get(selected).getItems());
-                   Toast.makeText(context,"pocision " +  titulo , Toast.LENGTH_LONG).show();
+                   Toast.makeText(context,"pocision "+ selected +  titulo , Toast.LENGTH_LONG).show();
 
                     //final String postId= productos.get(selected).getIdPosts();
 

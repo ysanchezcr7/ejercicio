@@ -6,37 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:background="@color/design_default_color_secondary_variant"-->
-<!--        android:elevation="3dp"-->
-<!--        android:gravity="fill_horizontal"-->
-<!--        android:minHeight="0dp"-->
-<!--        android:theme="@style/AlertDialog.AppCompat"-->
-<!--        app:title="Comments Posts"-->
-<!--        app:titleTextColor="@color/cardview_light_background"-->
-<!--        tools:ignore="MissingConstraints,NotSibling" />-->
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:id="@+id/toolbar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="?attr/actionBarSize"-->
+    <!--        android:background="@color/design_default_color_secondary_variant"-->
+    <!--        android:elevation="3dp"-->
+    <!--        android:gravity="fill_horizontal"-->
+    <!--        android:minHeight="0dp"-->
+    <!--        android:theme="@style/AlertDialog.AppCompat"-->
+    <!--        app:title="Comments Posts"-->
+    <!--        app:titleTextColor="@color/cardview_light_background"-->
+    <!--        tools:ignore="MissingConstraints,NotSibling" />-->
 
-        <RelativeLayout
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
+
             <androidx.recyclerview.widget.RecyclerView
 
                 android:id="@+id/rvCategorias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:elevation="2dp"
-                tools:ignore="RtlCompat">
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                >
 
             </androidx.recyclerview.widget.RecyclerView>
 
 
         </RelativeLayout>
+
 
 
 
