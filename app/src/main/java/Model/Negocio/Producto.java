@@ -1,29 +1,45 @@
 package Model.Negocio;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Producto {
+public class Producto  implements Serializable  {
+    public Producto(){
+
+    }
 
     @SerializedName("id")
     private String id;
+
     @SerializedName("tiendaId")
     private String tiendaId;
+
     @SerializedName("titulo")
     private String titulo;
+
     @SerializedName("descripcion")
     private String descripcion;
+
     @SerializedName("urlImagen")
     private String urlImagen;
+
     @SerializedName("status")
     private int status;
+
     @SerializedName("descuento")
     private int descuento;
 
+    @SerializedName("precios")
     private ArrayList<Precio> precios;
 
+    @SerializedName("extras")
     private ArrayList<Extra> extras;
+
 
     public ArrayList<Extra> getExtras() {
         return extras;

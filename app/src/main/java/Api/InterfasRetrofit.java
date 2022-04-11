@@ -1,11 +1,9 @@
 package Api;
 
-
-
-
 import java.util.ArrayList;
 
 import Model.Data.CategoriaResponse;
+import Model.Negocio.CategoriasWithProd;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -15,7 +13,7 @@ import retrofit2.http.Query;
 public interface InterfasRetrofit {
 
     @GET("categoriasWithProd.php")
-    Call <ArrayList<CategoriaResponse>> getCategorias();
+    Call <ArrayList<CategoriasWithProd>> getCategorias();
 //
 //    @GET("comments")
 //    Call <ArrayList<PostsComent>> getPostsComents(

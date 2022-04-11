@@ -6,6 +6,8 @@ buildscript {
 
 
         maven{ url "http://maven.prod.uci.cu/repository/maven.google.com/" }
+       // maven{ url "http://maven.prod.uci.cu/service/rest/repository/browse/maven.google.com/" }
+
         maven{ url "http://maven.prod.uci.cu/repository/maven-central/" }
         maven{ url "http://maven.prod.uci.cu/repository/maven-snapshots/"}
     }
@@ -22,8 +24,9 @@ allprojects {
         //google()
        // jcenter()
 
-
         maven{ url "http://maven.prod.uci.cu/repository/maven.google.com/" }
+       // maven{ url "http://maven.prod.uci.cu/service/rest/repository/browse/maven.google.com" }
+
         maven{ url "http://maven.prod.uci.cu/repository/maven-central/" }
         maven{ url "http://maven.prod.uci.cu/repository/maven-snapshots/"}
     }
