@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Producto  implements Serializable  {
+
+    private int pos =-1;
+
     public Producto(){
 
     }
@@ -123,5 +126,11 @@ public class Producto  implements Serializable  {
         this.descuento = descuento;
     }
 
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
 
+    public int getPos() {
+        return pos;
+    }
 }

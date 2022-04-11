@@ -18,6 +18,8 @@ import Model.Negocio.CategoriasWithProd;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import Model.Negocio.Producto;
 import yosva.cu.example.R;
 
 
@@ -65,8 +67,18 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
         );
         layoutManager.setInitialPrefetchItemCount(categoria.getProducto().size());
 
+
+        ArrayList<Producto> productos_new = categoria.getProducto();
+        ArrayList<Producto> productos = new ArrayList<Producto>();
+
+        for(int i = 0; i<productos_new.size();i++){
+            Producto item = (Producto) productos_new.get(i);
+            item.setPos(i);
+            productos.add(item);
+        }
+
        // Log.e("lisProd","->" + categoria.getProducto() );
-        ListaProductoAdapter listaProductoAdapter = new ListaProductoAdapter(categoria.getProducto(),context);
+        ListaProductoAdapter listaProductoAdapter = new ListaProductoAdapter(productos,context);
         catViewHolder.recyclerViewProductos.setLayoutManager(layoutManager);
         catViewHolder.recyclerViewProductos.setAdapter(listaProductoAdapter);
         catViewHolder.recyclerViewProductos.setRecycledViewPool(viewPool);

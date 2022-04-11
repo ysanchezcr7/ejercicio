@@ -72,6 +72,15 @@
                 android:src="@drawable/contact_img_vasio">
 
             </ImageView>
+
+        <TextView
+            android:id="@+id/position"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:text="-1"
+            android:layout_height="wrap_content">
+
+        </TextView>
         </LinearLayout>
 
 </androidx.cardview.widget.CardView>

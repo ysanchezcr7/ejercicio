@@ -53,7 +53,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
 
     public static ArrayList<Producto> productos;
     public static Context context;
-    //public static Producto producto;
+    public static Producto producto;
     public static ListaProductoAdapter adapter;
     private static View.OnClickListener listener;
 
@@ -85,11 +85,11 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
 
     @Override
     public void onBindViewHolder(ProductoViewHolder productoViewHolder, int position) {
-
-        Producto producto = productos.get(position);
+         producto = productos.get(position);
         //String id = String.valueOf(post.getIdPosts());
         // postsViewHolder.tvTitle.setText(usserid);
         productoViewHolder.tvTitle.setText(producto.getTitulo());
+        productoViewHolder.position.setText(String.valueOf(producto.getPos()));
         productoViewHolder.tvdescription.setText(producto.getDescripcion());
 
        // Glide.with(context).load(producto.getUrlImagen()).into(productoViewHolder.imgProducto);
@@ -148,6 +148,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
 
         //private ImageView imgFotos;
         private ImageView imgProducto;
+        private TextView position;
         private TextView tvTitle;
         private TextView tvdescription;
         private RecyclerView recyclerViewPrecio;
@@ -158,6 +159,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
             super(itemView);
             //tvUsserId = itemView.findViewById(R.id.tvUsserID);
             // tvID = itemView.findViewById(R.id.tvId);
+            position = itemView.findViewById(R.id.position);
             tvTitle = itemView.findViewById(R.id.tvtitleprod);
             tvdescription = itemView.findViewById(R.id.tvdescription);
             imgProducto = itemView.findViewById(R.id.imgProducto);
@@ -170,7 +172,9 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
                 @Override
                 public void onClick(View view) {
 
-                    int selected = getLayoutPosition();
+                   // int selected = getLayoutPosition();
+                    int selected = Integer.parseInt(position.getText().toString());
+
                     final String url = productos.get(selected).getUrlImagen();
                     final String titulo = productos.get(selected).getTitulo();
                     final String description = productos.get(selected).getDescripcion();
