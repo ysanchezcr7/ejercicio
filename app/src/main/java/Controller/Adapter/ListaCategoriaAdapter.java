@@ -55,7 +55,7 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
 
     @Override
     public void onBindViewHolder(CategoriaViewHolder catViewHolder, int position) {
-        catViewHolder.setIsRecyclable(false);
+
         CategoriasWithProd categoria = categorias.get(position);
         catViewHolder.tvTitle.setText(categoria.getCategoria());
         catViewHolder.recyclerViewProductos.setHasFixedSize(true);
@@ -72,7 +72,7 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
         catViewHolder.recyclerViewProductos.setRecycledViewPool(viewPool);
         listaProductoAdapter.notifyDataSetChanged();
 
-
+        catViewHolder.setIsRecyclable(true);
 
     }
     @Override

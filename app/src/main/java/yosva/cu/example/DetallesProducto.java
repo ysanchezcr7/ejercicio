@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -89,6 +92,13 @@ public class DetallesProducto extends AppCompatActivity {
 
         tituloDetall.setText(titulo);
         descricionDetall.setText(descricion);
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round);
+        Glide.with(DetallesProducto.this).load(url).apply(options).into(imageViewDetall);
+
         inicializarAdaptadorPrecio();
         inicializarAdaptadorExtra();
 

@@ -85,7 +85,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
 
     @Override
     public void onBindViewHolder(ProductoViewHolder productoViewHolder, int position) {
-        productoViewHolder.setIsRecyclable(false);
+
         Producto producto = productos.get(position);
         //String id = String.valueOf(post.getIdPosts());
         // postsViewHolder.tvTitle.setText(usserid);
@@ -99,22 +99,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
                 .error(R.mipmap.ic_launcher_round);
 
 
-
         Glide.with(context).load(producto.getUrlImagen()).apply(options).into(productoViewHolder.imgProducto);
-//        if (producto.getUrlImagen() == null) {
-//            productoViewHolder.imgProducto.setImageDrawable(context.getResources().getDrawable(R.drawable.contact_img_vasio));
-//        } else {
-//
-//            Bitmap image = getBitmapFromURL(producto.getUrlImagen());
-//            productoViewHolder.imgProducto.setImageBitmap(image);
-//
-//
-//        }
-        //  productoViewHolder.imgProducto.setImageResource(producto.getUrlImagen());
-        // postsViewHolder.setIsRecyclable(false);
-
-
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 productoViewHolder.recyclerViewPrecio.getContext(),
                 LinearLayoutManager.HORIZONTAL, false
@@ -127,7 +112,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
         productoViewHolder.recyclerViewPrecio.setAdapter(listaPrecAdapter);
         productoViewHolder.recyclerViewPrecio.setRecycledViewPool(viewPool);
 
-
+        productoViewHolder.setIsRecyclable(true);
 
     }
 
