@@ -36,6 +36,7 @@ import Model.Negocio.Precio;
 import Model.Negocio.Producto;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -84,14 +85,15 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
     }
 
     @Override
-    public void onBindViewHolder(ProductoViewHolder productoViewHolder, int position) {
+    public void onBindViewHolder(final ProductoViewHolder productoViewHolder, final int position) {
+
          producto = productos.get(position);
         //String id = String.valueOf(post.getIdPosts());
         // postsViewHolder.tvTitle.setText(usserid);
         productoViewHolder.tvTitle.setText(producto.getTitulo());
         productoViewHolder.position.setText(String.valueOf(producto.getPos()));
         productoViewHolder.tvdescription.setText(producto.getDescripcion());
-
+        final String url = producto.getUrlImagen();
        // Glide.with(context).load(producto.getUrlImagen()).into(productoViewHolder.imgProducto);
         RequestOptions options = new RequestOptions()
                 .centerCrop()
@@ -99,7 +101,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
                 .error(R.mipmap.ic_launcher_round);
 
 
-        Glide.with(context).load(producto.getUrlImagen()).apply(options).into(productoViewHolder.imgProducto);
+        Glide.with(context).load(url).apply(options).into(productoViewHolder.imgProducto);
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 productoViewHolder.recyclerViewPrecio.getContext(),
                 LinearLayoutManager.HORIZONTAL, false
@@ -111,8 +113,40 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
         productoViewHolder.recyclerViewPrecio.setLayoutManager(layoutManager);
         productoViewHolder.recyclerViewPrecio.setAdapter(listaPrecAdapter);
         productoViewHolder.recyclerViewPrecio.setRecycledViewPool(viewPool);
-
         productoViewHolder.setIsRecyclable(true);
+
+
+       //textViewNombre= itemView.findViewById(R.id.showNameCard);
+
+
+        productoViewHolder.item_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //productoViewHolder.recyclerViewPrecio.getAdapter();
+                final String titulo = (String) productoViewHolder.tvTitle.getText();
+                final String urlIn = url;
+                final String description = (String) productoViewHolder.tvdescription.getText();
+                final ArrayList<Precio> pre = producto.getPrecios();
+                final ArrayList<Extra> extras = producto.getExtras();
+                Intent inte = new Intent(context, DetallesProducto.class);
+                inte.putExtra("url", url);
+                inte.putExtra("titulo", titulo);
+                inte.putExtra("descrition", description);
+                // inte.putExtra("selected", selected);
+                inte.putParcelableArrayListExtra("arrayPre", pre);
+                inte.putParcelableArrayListExtra("arrayExtras", extras);
+                // inte.putParcelableArrayListExtra("arrayIt", it);
+                //inte.putExtra("arrayPrecios", precios);
+                context.startActivity(inte);
+                Toast.makeText(context,"pocision "+ position +  productoViewHolder.tvTitle.getText() , Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(view.getContext(), ShowDetailActivity.class);
+//                // envías los TextView de esta forma:
+//                intent.putExtra("clave1", textViewNombre.getText());
+//                // para las imágenes de esta forma:
+//                intent.putExtra("clave2", shows.get(getAdapterPosition()).getImg_show());
+//                view.getContext().startActivity(intent);
+            }
+        });
 
     }
 
@@ -152,6 +186,7 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
         private TextView tvTitle;
         private TextView tvdescription;
         private RecyclerView recyclerViewPrecio;
+        private CardView item_show;
 
 
         public ProductoViewHolder(final View itemView) {
@@ -164,73 +199,75 @@ public class ListaProductoAdapter extends RecyclerView.Adapter<ListaProductoAdap
             tvdescription = itemView.findViewById(R.id.tvdescription);
             imgProducto = itemView.findViewById(R.id.imgProducto);
             recyclerViewPrecio = itemView.findViewById(R.id.rvPrecio);
+            item_show = itemView.findViewById(R.id.cardProd);
+
 
             //context = itemView.getContext();
           //  itemView.setOnClickListener(this);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("RestrictedApi")
-                @Override
-                public void onClick(View view) {
-
-                   // int selected = getLayoutPosition();
-                    int selected = Integer.parseInt(position.getText().toString());
-
-                    final String url = productos.get(selected).getUrlImagen();
-                    final String titulo = productos.get(selected).getTitulo();
-                    final String description = productos.get(selected).getDescripcion();
-                    //ArrayList<String> milista = new ArrayList<String>();
-                    final ArrayList<Precio> pre = productos.get(selected).getPrecios();
-
-                    final ArrayList<Extra> extras = productos.get(selected).getExtras();
-                   // ArrayList<Items> it ;
-                   // it = extras.get(selected).getItems();
-                    //Log.e("item","" + item);
-                    //Log.e("extras","e: "+ extras.get(selected).getItems());
-                   Toast.makeText(context,"pocision "+ selected +  titulo , Toast.LENGTH_LONG).show();
-
-                    //final String postId= productos.get(selected).getIdPosts();
-
-                    @SuppressLint("RestrictedApi") MenuBuilder menuBuilder = new MenuBuilder(context);
-                    MenuInflater inflater = new MenuInflater(context);
-                    inflater.inflate(R.menu.menu_popou_verdetall_producto, menuBuilder);
-                    @SuppressLint("RestrictedApi") MenuPopupHelper optionsMenuComent = new MenuPopupHelper(context, menuBuilder, view);
-                    optionsMenuComent.setForceShowIcon(true);
-
-                    // Set Item Click Listener
-                    menuBuilder.setCallback(new MenuBuilder.Callback() {
-                        @Override
-                        public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.action_detallesProducto: // Handle option1 Click
-
-                                    Intent inte = new Intent(context, DetallesProducto.class);
-                                    inte.putExtra("url", url);
-                                    inte.putExtra("titulo", titulo);
-                                    inte.putExtra("descrition", description);
-                                   // inte.putExtra("selected", selected);
-                                    inte.putParcelableArrayListExtra("arrayPre", pre);
-                                    inte.putParcelableArrayListExtra("arrayExtras", extras);
-                                   // inte.putParcelableArrayListExtra("arrayIt", it);
-                                    //inte.putExtra("arrayPrecios", precios);
-                                    context.startActivity(inte);
-                                    //overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-
-                                    return true;
-                                default:
-                                    return false;
-                            }
-                        }
-
-
-                        @Override
-                        public void onMenuModeChange(MenuBuilder menu) {
-                        }
-                    });
-                    // Display the menu
-                    optionsMenuComent.show();
-
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @SuppressLint("RestrictedApi")
+//                @Override
+//                public void onClick(View view) {
+//
+//                    int selected = getLayoutPosition();
+//                   // int selected = Integer.parseInt(position.getText().toString());
+//
+//                    final String url = productos.get(selected).getUrlImagen();
+//                    final String titulo = productos.get(selected).getTitulo();
+//                    final String description = productos.get(selected).getDescripcion();
+//                    //ArrayList<String> milista = new ArrayList<String>();
+//                    final ArrayList<Precio> pre = productos.get(selected).getPrecios();
+//
+//                    final ArrayList<Extra> extras = productos.get(selected).getExtras();
+//                   // ArrayList<Items> it ;
+//                   // it = extras.get(selected).getItems();
+//                    //Log.e("item","" + item);
+//                    //Log.e("extras","e: "+ extras.get(selected).getItems());
+//                   Toast.makeText(context,"pocision "+ selected +  titulo , Toast.LENGTH_LONG).show();
+//
+//                    //final String postId= productos.get(selected).getIdPosts();
+//
+//                  /*  @SuppressLint("RestrictedApi") MenuBuilder menuBuilder = new MenuBuilder(context);
+//                    MenuInflater inflater = new MenuInflater(context);
+//                    inflater.inflate(R.menu.menu_popou_verdetall_producto, menuBuilder);
+//                    @SuppressLint("RestrictedApi") MenuPopupHelper optionsMenuComent = new MenuPopupHelper(context, menuBuilder, view);
+//                    optionsMenuComent.setForceShowIcon(true);
+//
+//                    // Set Item Click Listener
+//                    menuBuilder.setCallback(new MenuBuilder.Callback() {
+//                        @Override
+//                        public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
+//                            switch (item.getItemId()) {
+//                                case R.id.action_detallesProducto: // Handle option1 Click
+//
+//                                    Intent inte = new Intent(context, DetallesProducto.class);
+//                                    inte.putExtra("url", url);
+//                                    inte.putExtra("titulo", titulo);
+//                                    inte.putExtra("descrition", description);
+//                                   // inte.putExtra("selected", selected);
+//                                    inte.putParcelableArrayListExtra("arrayPre", pre);
+//                                    inte.putParcelableArrayListExtra("arrayExtras", extras);
+//                                   // inte.putParcelableArrayListExtra("arrayIt", it);
+//                                    //inte.putExtra("arrayPrecios", precios);
+//                                    context.startActivity(inte);
+//                                    //overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+//
+//                                    return true;
+//                                default:
+//                                    return false;
+//                            }
+//                        }
+//
+//
+//                        @Override
+//                        public void onMenuModeChange(MenuBuilder menu) {
+//                        }
+//                    });
+//                    // Display the menu
+//                    optionsMenuComent.show();*/
+//
+//                }
+//            });
 
         }
 

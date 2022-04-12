@@ -23,6 +23,8 @@ public class Extra implements Parcelable {
         this.items = items;
     }
 
+    //private int pos =-1;
+
     @SerializedName("id")
     public String id;
 

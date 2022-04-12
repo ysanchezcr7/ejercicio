@@ -31,4 +31,11 @@ public class CategoriasWithProd {
         this.producto = producto;
     }
 
+    @Override
+    public String toString() {
+        return "CategoriasWithProd{" +
+                "categoria='" + categoria + '\'' +
+                ", producto=" + producto +
+                '}';
+    }
 }

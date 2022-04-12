@@ -25,7 +25,8 @@
         android:layout_below="@id/Categoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rvProductos">
+        android:id="@+id/rvProductos"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
     </androidx.recyclerview.widget.RecyclerView>
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -61,13 +62,13 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
         CategoriasWithProd categoria = categorias.get(position);
         catViewHolder.tvTitle.setText(categoria.getCategoria());
         catViewHolder.recyclerViewProductos.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(
-           catViewHolder.recyclerViewProductos.getContext(),
-           LinearLayoutManager.VERTICAL,false
-        );
-        layoutManager.setInitialPrefetchItemCount(categoria.getProducto().size());
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(
+//           catViewHolder.recyclerViewProductos.getContext(),
+//           LinearLayoutManager.VERTICAL,false
+//        );
+     //   layoutManager.setInitialPrefetchItemCount(categoria.getProducto().size());
 
-
+//
         ArrayList<Producto> productos_new = categoria.getProducto();
         ArrayList<Producto> productos = new ArrayList<Producto>();
 
@@ -79,18 +80,18 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
 
        // Log.e("lisProd","->" + categoria.getProducto() );
         ListaProductoAdapter listaProductoAdapter = new ListaProductoAdapter(productos,context);
-        catViewHolder.recyclerViewProductos.setLayoutManager(layoutManager);
+       // catViewHolder.recyclerViewProductos.setLayoutManager(layoutManager);
         catViewHolder.recyclerViewProductos.setAdapter(listaProductoAdapter);
-        catViewHolder.recyclerViewProductos.setRecycledViewPool(viewPool);
-        listaProductoAdapter.notifyDataSetChanged();
+      //  catViewHolder.recyclerViewProductos.setRecycledViewPool(viewPool);
+      //  listaProductoAdapter.notifyDataSetChanged();
 
-        catViewHolder.setIsRecyclable(true);
+       // catViewHolder.setIsRecyclable(true);
 
     }
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
+//    @Override
+//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+//        super.onAttachedToRecyclerView(recyclerView);
+//    }
     @Override
     public int getItemCount() {
 
@@ -123,46 +124,7 @@ public class ListaCategoriaAdapter extends RecyclerView.Adapter<ListaCategoriaAd
 
             context = itemView.getContext();
             //itemView.setOnClickListener(this);
-//        itemView.setOnClickListener(new View.OnClickListener() {
-//                @SuppressLint("RestrictedApi")
-//                @Override
-//                public void onClick(View view) {
-//
-//                    int selected = getLayoutPosition();
-//                    final int postId= posts.get(selected).getIdPosts();
-//
-//                    @SuppressLint("RestrictedApi") MenuBuilder menuBuilder = new MenuBuilder(context);
-//                    MenuInflater inflater = new MenuInflater(context);
-//                    inflater.inflate(R.menu.menu_popou_vercomentposts, menuBuilder);
-//                    @SuppressLint("RestrictedApi") MenuPopupHelper optionsMenuComent = new MenuPopupHelper(context, menuBuilder, view);
-//                    optionsMenuComent.setForceShowIcon(true);
-//
-//                    // Set Item Click Listener
-//                    menuBuilder.setCallback(new MenuBuilder.Callback() {
-//                        @Override
-//                        public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
-//                            switch (item.getItemId()) {
-//                                case R.id.action_verComents: // Handle option1 Click
-//                                    Intent inte = new Intent(context, VerComentPost.class);
-//                                    inte.putExtra("idPosts", postId);
-//                                    context.startActivity(inte);
-//                                    //overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-//
-//                                    return true;
-//                                default:
-//                                    return false;
-//                            }
-//                        }
-//
-//
-//                        @Override
-//                        public void onMenuModeChange(MenuBuilder menu) {}
-//                    });
-//                    // Display the menu
-//                    optionsMenuComent.show();
-//
-//                }
-//            });
+
 
         }
 

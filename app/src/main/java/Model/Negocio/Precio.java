@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class Precio  implements Parcelable {
 
-    public  Precio () {
+   public  Precio () {
 
     }
     @SerializedName("titulo")

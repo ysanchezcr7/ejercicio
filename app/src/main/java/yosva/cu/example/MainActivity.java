@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void inicializarAdaptador() {
-
         adaptadorCategoria = new ListaCategoriaAdapter(categorias, this );
         listaCategoria.setAdapter(adaptadorCategoria);
         // adaptador.notifyDataSetChanged();
