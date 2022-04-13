@@ -2,11 +2,9 @@ package Api;
 
 import java.util.ArrayList;
 
-import Model.Data.CategoriaResponse;
-import Model.Negocio.CategoriasWithProd;
+import Model.Data.CategoriasWithProd;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 //import java.util.List;
 

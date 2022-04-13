@@ -1,30 +1,23 @@
 package yosva.cu.example;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-import Controller.Adapter.ListaCategoriaAdapter;
 import Controller.Adapter.ListaExtrasAdapter;
-import Controller.Adapter.ListaItemsAdapter;
 import Controller.Adapter.ListaPrecioAdapter;
-import Model.Negocio.CategoriasWithProd;
-import Model.Negocio.Extra;
-import Model.Negocio.Items;
-import Model.Negocio.Precio;
-import Model.Negocio.Producto;
+import Model.Data.Extra;
+import Model.Data.Precio;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +35,7 @@ public class DetallesProducto extends AppCompatActivity {
     int selec;
     private ArrayList <Precio> precios  ;
     private ArrayList <Extra> extras  ;
-
+    Toolbar toolbar;
 
     int onStartCount=0;
     @Override
@@ -65,7 +58,7 @@ public class DetallesProducto extends AppCompatActivity {
         imageViewDetall = findViewById(R.id.imgdetalleProd);
         tituloDetall = findViewById(R.id.tvtitleprodetall);
         descricionDetall = findViewById(R.id.tvdescriptiondetall);
-
+        toolbar = findViewById(R.id.toolbar);
        // Bundle bundle = getIntent().getExtras();
         //ListObjetos = bundle.getParcelableArrayList("ListaObjetos");
         if (getIntent() != null) {
@@ -88,6 +81,18 @@ public class DetallesProducto extends AppCompatActivity {
 //            if (b.getParcelable("imagenContact") != null)
 //                bitmap = b.getParcelable("imagenContact");
 
+        }
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            toolbar.setNavigationIcon(R.drawable.ic_back);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
         }
 
         tituloDetall.setText(titulo);
@@ -118,13 +123,17 @@ public class DetallesProducto extends AppCompatActivity {
         adapterprecio = new ListaPrecioAdapter(precios, this );
         rvpreciodetall.setAdapter(adapterprecio);
 
-
     }
     private void inicializarAdaptadorExtra() {
 
         adapterextra= new ListaExtrasAdapter(extras,this);
         rvExtras.setAdapter(adapterextra);
 
+    }
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.anim_slide_out_left, R.anim.anim_slide_in_right);
+        super.onBackPressed();
     }
 //    private void inicializarAdaptadorItems() {
 ////        itemsAdapter= new ListaItemsAdapter(itemsArrayList,this);

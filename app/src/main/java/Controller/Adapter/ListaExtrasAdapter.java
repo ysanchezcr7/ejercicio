@@ -1,28 +1,18 @@
 package Controller.Adapter;
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import Model.Negocio.Extra;
-import Model.Negocio.Precio;
-import Model.Negocio.Producto;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.view.menu.MenuPopupHelper;
+import Model.Data.Extra;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import yosva.cu.example.DetallesProducto;
 import yosva.cu.example.R;
 
 

@@ -1,16 +1,13 @@
-package Model.Negocio;
+package Model.Data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 public class Precio  implements Parcelable {
 
    public  Precio () {
-
     }
     @SerializedName("titulo")
     private String titulo;

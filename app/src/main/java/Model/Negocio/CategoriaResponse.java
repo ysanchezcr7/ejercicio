@@ -1,4 +1,4 @@
-package Model.Data;
+package Model.Negocio;
 
 import java.util.ArrayList;
 

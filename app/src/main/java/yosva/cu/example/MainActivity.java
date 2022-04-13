@@ -1,13 +1,16 @@
 package yosva.cu.example;
 
 import Api.RetofitClient;
-import Controller.Adapter.ListaCategoriaAdapter;
-import Model.Negocio.CategoriasWithProd;
+import Controller.Adapter.ListaProductoAdapterSection;
+import Model.Data.CategoriasWithProd;
+import Model.Data.Producto;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,7 +20,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,9 +27,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListaCategoriaAdapter adaptadorCategoria;
+    //private ListaCategoriaAdapter adaptadorCategoria;
+    private ListaProductoAdapterSection adaptadorSectiom ;
     private Context context;
     ArrayList<CategoriasWithProd> categorias;
+
+    //@BindView(R.id.rvCategorias)
     RecyclerView listaCategoria;
 
     //SwipeRefreshLayout refreshLayout;
@@ -38,8 +43,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkAndRequestPermissions();
+
+       // setAdapter();
         listaCategoria = findViewById(R.id.rvCategorias);
-        listaCategoria.setHasFixedSize(true);
+       // listaCategoria.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaCategoria.setLayoutManager(llm);
@@ -47,12 +54,13 @@ public class MainActivity extends AppCompatActivity {
         inicializarAdaptador();
         lanzarPeticion();
 
+
     }
 
 
     private void inicializarAdaptador() {
-        adaptadorCategoria = new ListaCategoriaAdapter(categorias, this );
-        listaCategoria.setAdapter(adaptadorCategoria);
+        adaptadorSectiom = new ListaProductoAdapterSection(categorias, this );
+        listaCategoria.setAdapter(adaptadorSectiom);
         // adaptador.notifyDataSetChanged();
 
     }
@@ -79,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"Succesful Data " , Toast.LENGTH_LONG).show();
                //Log.d("Array ", "r: "+ response.body());
-                adaptadorCategoria.setData(response.body());
+                adaptadorSectiom.setData(response.body());
 
                 if (progressDialog != null) {
                     progressDialog.dismiss();

@@ -1,13 +1,13 @@
-package Model.Negocio;
-
-import android.os.Parcel;
-import android.os.Parcelable;
+package Model.Data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import Model.Data.Extra;
+import Model.Data.Precio;
 
 public class Producto  implements Serializable  {
 

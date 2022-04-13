@@ -1,9 +1,11 @@
-package Model.Negocio;
+package Model.Data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+
+import Model.Data.Producto;
 
 public class CategoriasWithProd {
 
@@ -14,6 +16,8 @@ public class CategoriasWithProd {
     @SerializedName("productos")
     @Expose
     private ArrayList<Producto> producto;
+
+
 
     public String getCategoria() {
         return categoria;

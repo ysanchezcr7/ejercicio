@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import Model.Negocio.Items;
-import Model.Negocio.Precio;
+import Model.Data.Items;
 import androidx.recyclerview.widget.RecyclerView;
 import yosva.cu.example.R;
 

@@ -1,11 +1,18 @@
 package Controller.Adapter;
 
 
+import android.os.Build;
+import android.util.ArrayMap;
 import android.view.ViewGroup;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
 public abstract class SectionedRecyclerViewAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
@@ -16,6 +23,7 @@ public abstract class SectionedRecyclerViewAdapter<VH extends RecyclerView.ViewH
     private final ArrayMap<Integer, Integer> mHeaderLocationMap;
     private GridLayoutManager mLayoutManager;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     SectionedRecyclerViewAdapter() {
         mHeaderLocationMap = new ArrayMap<>();
     }

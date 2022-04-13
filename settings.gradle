@@ -1,2 +1,2 @@
-include ':app', ':sectionedrecyclerview'
+include ':app'
 rootProject.name = "Example"

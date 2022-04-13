@@ -1,26 +1,15 @@
-package Model.Negocio;
+package Model.Data;
 
-import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Extra implements Parcelable {
-    public Extra (String id, String titulo, String descripcion,
-                  int status, int maximo,int minimo ,
-                  int obligatorio ,ArrayList<Items> items) {
-        this.id = id;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.status = status;
-        this.maximo = maximo;
-        this.minimo = minimo;
-        this.obligatorio = obligatorio;
-        this.items = items;
+    public Extra () {
+
     }
 
     //private int pos =-1;
@@ -59,21 +48,15 @@ public class Extra implements Parcelable {
     }
 
     protected Extra(Parcel in) {
-        this.id = in.readString();
-        this.titulo = in.readString();
-        this.descripcion = in.readString();
-        this.status = in.readInt();
-        this.maximo = in.readInt();
-        this.minimo = in.readInt();
-        this.obligatorio = in.readInt();
-        this.items = (ArrayList<Items>) in.readValue(Items.class.getClassLoader());
+        id = in.readString();
+        titulo = in.readString();
+        descripcion = in.readString();
+        status = in.readInt();
+        maximo = in.readInt();
+        minimo = in.readInt();
+        obligatorio = in.readInt();
+        items = (ArrayList<Items>) in.readValue(Items.class.getClassLoader());
 
-        //  this.items = in.createBinderArray();
-        //in.readList(this.items, getClass().getClassLoader());
-
-        //in.readTypedList(items, Items.CREATOR);
-
-        //items=in.readArrayList();
     }
 
 
@@ -149,10 +132,6 @@ public class Extra implements Parcelable {
         dest.writeInt(minimo);
         dest.writeInt(obligatorio);
         dest.writeValue(items);
-
-        //dest.writeTypedList(items);
-
-
     }
     public static final Creator<Extra> CREATOR = new Creator<Extra>() {
         @Override
