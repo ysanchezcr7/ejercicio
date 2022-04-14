@@ -27,10 +27,11 @@
 
         <ImageView
             android:id="@+id/imgdetalleProd"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
             android:layout_gravity="center"
-            android:src="@drawable/contact_img_vasio" />
+            />
 
         <TextView
             android:id="@+id/tvtitleprodetall"

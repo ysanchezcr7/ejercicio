@@ -116,10 +116,15 @@ public class ListaProductoAdapterSection extends SectionedRecyclerViewAdapter<Re
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher_round)
+                .circleCrop()
                 .error(R.mipmap.ic_launcher_round);
 
 
-        Glide.with(context).load(producto.getUrlImagen()).apply(options).into(itemViewHolder.imgProducto);
+        Glide.with(context).load(producto
+                .getUrlImagen())
+                .apply(options)
+
+                .into(itemViewHolder.imgProducto);
         /*LinearLayoutManager layoutManager = new LinearLayoutManager(
                 productoViewHolder.recyclerViewPrecio.getContext(),
                 LinearLayoutManager.HORIZONTAL, false

@@ -101,6 +101,7 @@ public class DetallesProducto extends AppCompatActivity {
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher_round)
+
                 .error(R.mipmap.ic_launcher_round);
         Glide.with(DetallesProducto.this).load(url).apply(options).into(imageViewDetall);
 
